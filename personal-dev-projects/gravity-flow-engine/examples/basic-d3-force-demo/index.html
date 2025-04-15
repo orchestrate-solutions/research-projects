@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravity Flow Engine - Basic Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    #container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f5f5f5;
+    }
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .node {
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+    
+    .link {
+      stroke: #999;
+      stroke-opacity: 0.6;
+      stroke-width: 2px;
+    }
+    
+    .control-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slider-container {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    input[type="range"] {
+      width: 100%;
+    }
+    
+    select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .pattern-info {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <svg></svg>
+  </div>
+  
+  <div class="control-panel">
+    <h3>Physics Controls</h3>
+    
+    <div class="slider-container">
+      <label for="charge-strength">Charge Strength: <span id="charge-value">-100</span></label>
+      <input type="range" id="charge-strength" min="-300" max="0" value="-100">
+    </div>
+    
+    <div class="slider-container">
+      <label for="link-strength">Link Strength: <span id="link-value">0.3</span></label>
+      <input type="range" id="link-strength" min="0" max="1" value="0.3" step="0.05">
+    </div>
+    
+    <div class="slider-container">
+      <label for="link-distance">Link Distance: <span id="distance-value">100</span></label>
+      <input type="range" id="link-distance" min="20" max="300" value="100">
+    </div>
+    
+    <div class="slider-container">
+      <label for="pattern-display">Pattern Type:</label>
+      <select id="pattern-display">
+        <option value="all">All Patterns</option>
+        <option value="structural">Structural Patterns</option>
+        <option value="process">Process Patterns</option>
+        <option value="relationship">Relationship Patterns</option>
+      </select>
+    </div>
+    
+    <button id="reset-simulation">Reset Simulation</button>
+  </div>
+  
+  <div class="pattern-info" id="pattern-info">
+    <h3 id="pattern-name"></h3>
+    <p id="pattern-description"></p>
+    <p id="pattern-relations"></p>
+  </div>
+  
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Pattern data model
+    const patternData = {
+      nodes: [
+        // Structural patterns
+        { id: "fractal-self-similarity", label: "Fractal Self-Similarity", category: "structural", 
+          description: "A pattern where similar structures repeat at different scales.", 
+          physicalProperties: { mass: 5, charge: -150, friction: 0.2, radius: 15 } },
+        { id: "network-structure", label: "Network Structure", category: "structural", 
+          description: "Patterns of connections between entities, characterized by nodes and edges.", 
+          physicalProperties: { mass: 8, charge: -150, friction: 0.2, radius: 20 } },
+        { id: "hierarchical-organization", label: "Hierarchical Organization", category: "structural", 
+          description: "A pattern where elements are arranged in levels or ranks.", 
+          physicalProperties: { mass: 6, charge: -150, friction: 0.2, radius: 18 } },
+        
+        // Process patterns
+        { id: "emergent-behavior", label: "Emergent Behavior", category: "process", 
+          description: "Complex patterns arising from simple component interactions.", 
+          physicalProperties: { mass: 4, charge: -120, friction: 0.3, radius: 14 } },
+        { id: "feedback-loops", label: "Feedback Loops", category: "process", 
+          description: "Outputs of a process influence the inputs of the same process.", 
+          physicalProperties: { mass: 5, charge: -130, friction: 0.3, radius: 15 } },
+        { id: "cyclical-patterns", label: "Cyclical Patterns", category: "process", 
+          description: "Recurring sequences that repeat in a predictable manner.", 
+          physicalProperties: { mass: 4, charge: -120, friction: 0.3, radius: 14 } },
+        
+        // Relationship patterns
+        { id: "resource-distribution", label: "Resource Distribution", category: "relationship", 
+          description: "How resources are allocated and flow through a system.", 
+          physicalProperties: { mass: 3, charge: -100, friction: 0.4, radius: 12 } },
+        { id: "symbiosis-mutualism", label: "Symbiosis & Mutualism", category: "relationship", 
+          description: "Cooperative relationships between entities for mutual benefit.", 
+          physicalProperties: { mass: 3, charge: -100, friction: 0.4, radius: 12 } }
+      ],
+      links: [
+        // Structural pattern relationships
+        { source: "fractal-self-similarity", target: "hierarchical-organization", 
+          physicalProperties: { stiffness: 0.3, length: 100, elasticity: 0.5 } },
+        { source: "fractal-self-similarity", target: "network-structure", 
+          physicalProperties: { stiffness: 0.3, length: 100, elasticity: 0.5 } },
+        { source: "network-structure", target: "hierarchical-organization", 
+          physicalProperties: { stiffness: 0.3, length: 100, elasticity: 0.5 } },
+        
+        // Process pattern relationships
+        { source: "emergent-behavior", target: "feedback-loops", 
+          physicalProperties: { stiffness: 0.4, length: 100, elasticity: 0.5 } },
+        { source: "feedback-loops", target: "cyclical-patterns", 
+          physicalProperties: { stiffness: 0.5, length: 80, elasticity: 0.5 } },
+        
+        // Relationship pattern relationships
+        { source: "resource-distribution", target: "symbiosis-mutualism", 
+          physicalProperties: { stiffness: 0.3, length: 100, elasticity: 0.5 } },
+        
+        // Cross-category relationships
+        { source: "network-structure", target: "resource-distribution", 
+          physicalProperties: { stiffness: 0.2, length: 150, elasticity: 0.5 } },
+        { source: "hierarchical-organization", target: "emergent-behavior", 
+          physicalProperties: { stiffness: 0.2, length: 150, elasticity: 0.5 } },
+        { source: "feedback-loops", target: "symbiosis-mutualism", 
+          physicalProperties: { stiffness: 0.2, length: 150, elasticity: 0.5 } }
+      ]
+    };
+    
+    // D3 visualization setup
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    
+    // Color scale for pattern categories
+    const colorScale = d3.scaleOrdinal()
+      .domain(["structural", "process", "relationship"])
+      .range(["#4285F4", "#34A853", "#EA4335"]);
+    
+    // Create SVG
+    const svg = d3.select("svg")
+      .attr("width", width)
+      .attr("height", height);
+    
+    // Create link and node groups
+    const linkGroup = svg.append("g").attr("class", "links");
+    const nodeGroup = svg.append("g").attr("class", "nodes");
+    
+    // Initialize force simulation
+    let simulation;
+    
+    function initializeSimulation() {
+      // Create links
+      const links = linkGroup.selectAll("line")
+        .data(patternData.links)
+        .enter()
+        .append("line")
+        .attr("class", "link")
+        .attr("stroke-width", d => Math.sqrt(d.physicalProperties.stiffness * 5));
+      
+      // Create nodes
+      const nodes = nodeGroup.selectAll("circle")
+        .data(patternData.nodes)
+        .enter()
+        .append("circle")
+        .attr("class", "node")
+        .attr("r", d => d.physicalProperties.radius)
+        .attr("fill", d => colorScale(d.category))
+        .call(d3.drag()
+          .on("start", dragStarted)
+          .on("drag", dragging)
+          .on("end", dragEnded))
+        .on("mouseover", showPatternInfo)
+        .on("mouseout", hidePatternInfo);
+      
+      // Add labels
+      const labels = nodeGroup.selectAll("text")
+        .data(patternData.nodes)
+        .enter()
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", 30)
+        .attr("pointer-events", "none")
+        .style("font-size", "12px")
+        .style("font-weight", "bold")
+        .style("fill", "#333")
+        .text(d => d.label);
+      
+      // Create force simulation
+      simulation = d3.forceSimulation(patternData.nodes)
+        .force("charge", d3.forceManyBody()
+          .strength(d => d.physicalProperties.charge))
+        .force("link", d3.forceLink(patternData.links)
+          .id(d => d.id)
+          .distance(d => d.physicalProperties.length)
+          .strength(d => d.physicalProperties.stiffness))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collision", d3.forceCollide()
+          .radius(d => d.physicalProperties.radius + 10))
+        .force("x", d3.forceX()
+          .strength(0.05))
+        .force("y", d3.forceY()
+          .strength(0.05))
+        .alphaDecay(0.028)
+        .velocityDecay(0.4);
+      
+      // Handle tick events
+      simulation.on("tick", () => {
+        links
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+        
+        nodes
+          .attr("cx", d => d.x)
+          .attr("cy", d => d.y);
+        
+        labels
+          .attr("x", d => d.x)
+          .attr("y", d => d.y);
+      });
+      
+      return { nodes, links, labels };
+    }
+    
+    // Initialize visualization
+    const { nodes, links, labels } = initializeSimulation();
+    
+    // Drag functions
+    function dragStarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+    
+    function dragging(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+    
+    function dragEnded(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+    
+    // Pattern info display
+    function showPatternInfo(event, d) {
+      const infoPanel = document.getElementById("pattern-info");
+      const nameElement = document.getElementById("pattern-name");
+      const descElement = document.getElementById("pattern-description");
+      const relationsElement = document.getElementById("pattern-relations");
+      
+      nameElement.textContent = d.label;
+      descElement.textContent = d.description;
+      
+      // Find related patterns
+      const relatedPatterns = patternData.links
+        .filter(link => link.source.id === d.id || link.target.id === d.id)
+        .map(link => {
+          const relatedId = link.source.id === d.id ? link.target.id : link.source.id;
+          return patternData.nodes.find(n => n.id === relatedId).label;
+        });
+      
+      relationsElement.textContent = `Related to: ${relatedPatterns.join(", ")}`;
+      
+      infoPanel.style.display = "block";
+    }
+    
+    function hidePatternInfo() {
+      document.getElementById("pattern-info").style.display = "none";
+    }
+    
+    // UI Controls
+    document.getElementById("charge-strength").addEventListener("input", function() {
+      const value = this.value;
+      document.getElementById("charge-value").textContent = value;
+      
+      simulation.force("charge").strength(d => value);
+      simulation.alpha(0.3).restart();
+    });
+    
+    document.getElementById("link-strength").addEventListener("input", function() {
+      const value = this.value;
+      document.getElementById("link-value").textContent = value;
+      
+      simulation.force("link").strength(value);
+      simulation.alpha(0.3).restart();
+    });
+    
+    document.getElementById("link-distance").addEventListener("input", function() {
+      const value = this.value;
+      document.getElementById("distance-value").textContent = value;
+      
+      simulation.force("link").distance(value);
+      simulation.alpha(0.3).restart();
+    });
+    
+    document.getElementById("pattern-display").addEventListener("change", function() {
+      const category = this.value;
+      
+      if (category === "all") {
+        nodes.style("visibility", "visible");
+        labels.style("visibility", "visible");
+        links.style("visibility", "visible");
+      } else {
+        // Filter nodes
+        nodes.style("visibility", d => d.category === category ? "visible" : "hidden");
+        labels.style("visibility", d => d.category === category ? "visible" : "hidden");
+        
+        // Filter links
+        links.style("visibility", d => {
+          const sourceCategory = patternData.nodes.find(n => n.id === d.source.id).category;
+          const targetCategory = patternData.nodes.find(n => n.id === d.target.id).category;
+          return sourceCategory === category && targetCategory === category ? "visible" : "hidden";
+        });
+      }
+      
+      simulation.alpha(0.3).restart();
+    });
+    
+    document.getElementById("reset-simulation").addEventListener("click", function() {
+      // Reset UI controls
+      document.getElementById("charge-strength").value = -100;
+      document.getElementById("charge-value").textContent = -100;
+      
+      document.getElementById("link-strength").value = 0.3;
+      document.getElementById("link-value").textContent = 0.3;
+      
+      document.getElementById("link-distance").value = 100;
+      document.getElementById("distance-value").textContent = 100;
+      
+      document.getElementById("pattern-display").value = "all";
+      
+      // Clear SVG and restart
+      linkGroup.selectAll("*").remove();
+      nodeGroup.selectAll("*").remove();
+      
+      if (simulation) simulation.stop();
+      
+      // Reinitialize
+      initializeSimulation();
+    });
+    
+    // Resize handler
+    window.addEventListener("resize", function() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      svg.attr("width", width).attr("height", height);
+      simulation.force("center", d3.forceCenter(width / 2, height / 2));
+      simulation.alpha(0.3).restart();
+    });
+  </script>
+</body>
+</html> 

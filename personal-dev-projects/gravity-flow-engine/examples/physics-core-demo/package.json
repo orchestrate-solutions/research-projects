@@ -1,0 +1,14 @@
+{
+  "name": "gravity-flow-engine-physics-core-demo",
+  "version": "0.1.0",
+  "description": "Core physics implementation for the Gravity Flow Engine",
+  "main": "physics-engine.js",
+  "scripts": {
+    "test": "node test-physics.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

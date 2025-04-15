@@ -1,0 +1,587 @@
+{
+  "step160": {
+    "nodes": [
+      {
+        "id": "fractal-self-similarity",
+        "x": 108.07557888288953,
+        "y": 311.40498264500496,
+        "vx": 5.109483303545779,
+        "vy": 1.577140236828357,
+        "category": "structural"
+      },
+      {
+        "id": "network-structure",
+        "x": 493.5739618867704,
+        "y": 305.865185707219,
+        "vx": 0.013883909417685449,
+        "vy": 2.3080305607286706,
+        "category": "structural"
+      },
+      {
+        "id": "hierarchical-organization",
+        "x": 663.6509551782156,
+        "y": 579.6781454502604,
+        "vx": -4.510736207772466,
+        "vy": -2.44522993231299,
+        "category": "structural"
+      },
+      {
+        "id": "emergent-behavior",
+        "x": 394.0087678908241,
+        "y": 518.0147323207183,
+        "vx": 1.2925417675405875,
+        "vy": 0.4392430111515917,
+        "category": "process"
+      },
+      {
+        "id": "feedback-loops",
+        "x": 481.02582463200827,
+        "y": 642.450398958034,
+        "vx": 0.07936339562713968,
+        "vy": -1.1827142340838264,
+        "category": "process"
+      },
+      {
+        "id": "cyclical-patterns",
+        "x": 550.2453974557379,
+        "y": 742.6060689010698,
+        "vx": -0.4998315730887513,
+        "vy": -1.613592572722142,
+        "category": "process"
+      },
+      {
+        "id": "resource-distribution",
+        "x": 986.6644809429254,
+        "y": 528.5069899610306,
+        "vx": -5.366196092980016,
+        "vy": -1.7124932932055672,
+        "category": "relationship"
+      },
+      {
+        "id": "symbiosis-mutualism",
+        "x": 335.06894747522205,
+        "y": 283.3384868796548,
+        "vx": 3.8579787947525745,
+        "vy": 2.624319275958083,
+        "category": "relationship"
+      }
+    ],
+    "links": [
+      {
+        "source": "fractal-self-similarity",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "fractal-self-similarity",
+        "target": "network-structure",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "emergent-behavior",
+        "target": "feedback-loops",
+        "length": 100.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "cyclical-patterns",
+        "length": 80.0
+      },
+      {
+        "source": "resource-distribution",
+        "target": "symbiosis-mutualism",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "resource-distribution",
+        "length": 150.0
+      },
+      {
+        "source": "hierarchical-organization",
+        "target": "emergent-behavior",
+        "length": 150.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "symbiosis-mutualism",
+        "length": 150.0
+      }
+    ],
+    "tick_count": 160,
+    "alpha": 0.024966250759389175
+  },
+  "step60": {
+    "nodes": [
+      {
+        "id": "fractal-self-similarity",
+        "x": 366.7228932105533,
+        "y": 330.0534611315501,
+        "vx": 3.60515900954007,
+        "vy": -131.68806072648314,
+        "category": "structural"
+      },
+      {
+        "id": "network-structure",
+        "x": 450.5429246926973,
+        "y": 444.4537923586979,
+        "vx": -3.1043728682720735,
+        "vy": 17.580072817995028,
+        "category": "structural"
+      },
+      {
+        "id": "hierarchical-organization",
+        "x": 724.6332529156588,
+        "y": 546.2358356967569,
+        "vx": -9.93131460310059,
+        "vy": -6.661702500142624,
+        "category": "structural"
+      },
+      {
+        "id": "emergent-behavior",
+        "x": 548.0357766217525,
+        "y": 551.7308417218517,
+        "vx": -1.7472946564792164,
+        "vy": -10.525247518351494,
+        "category": "process"
+      },
+      {
+        "id": "feedback-loops",
+        "x": 382.0547632438455,
+        "y": 502.07896418836134,
+        "vx": 10.078767151408039,
+        "vy": -15.338970412253017,
+        "category": "process"
+      },
+      {
+        "id": "cyclical-patterns",
+        "x": 404.1423836907376,
+        "y": 584.988384073969,
+        "vx": 44.776194751580306,
+        "vy": 143.43303004520476,
+        "category": "process"
+      },
+      {
+        "id": "resource-distribution",
+        "x": 545.6706900648459,
+        "y": 426.49905848316666,
+        "vx": -6.0512729070959494,
+        "vy": 11.996063436554351,
+        "category": "relationship"
+      },
+      {
+        "id": "symbiosis-mutualism",
+        "x": 604.1845972732004,
+        "y": 528.904992821173,
+        "vx": -38.139482424003454,
+        "vy": -8.91089280775968,
+        "category": "relationship"
+      }
+    ],
+    "links": [
+      {
+        "source": "fractal-self-similarity",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "fractal-self-similarity",
+        "target": "network-structure",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "emergent-behavior",
+        "target": "feedback-loops",
+        "length": 100.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "cyclical-patterns",
+        "length": 80.0
+      },
+      {
+        "source": "resource-distribution",
+        "target": "symbiosis-mutualism",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "resource-distribution",
+        "length": 150.0
+      },
+      {
+        "source": "hierarchical-organization",
+        "target": "emergent-behavior",
+        "length": 150.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "symbiosis-mutualism",
+        "length": 150.0
+      }
+    ],
+    "tick_count": 60,
+    "alpha": 0.25061525213225405
+  },
+  "step10": {
+    "nodes": [
+      {
+        "id": "fractal-self-similarity",
+        "x": 208.32897930736203,
+        "y": 69.63429217684825,
+        "vx": -172.46930165101446,
+        "vy": 18.445926215137323,
+        "category": "structural"
+      },
+      {
+        "id": "network-structure",
+        "x": 421.3092145501334,
+        "y": 712.2938405719214,
+        "vx": -206.37763022894848,
+        "vy": 33.639632919543935,
+        "category": "structural"
+      },
+      {
+        "id": "hierarchical-organization",
+        "x": 693.5118324258025,
+        "y": 1006.4110692117905,
+        "vx": -3.402052735880704,
+        "vy": 11.46383216838408,
+        "category": "structural"
+      },
+      {
+        "id": "emergent-behavior",
+        "x": 581.6264654992417,
+        "y": 104.07238291260992,
+        "vx": 231.32853300154397,
+        "vy": 44.45333030342564,
+        "category": "process"
+      },
+      {
+        "id": "feedback-loops",
+        "x": 433.04449401695905,
+        "y": 283.09400547828193,
+        "vx": -38.90913841362784,
+        "vy": 173.8907753003979,
+        "category": "process"
+      },
+      {
+        "id": "cyclical-patterns",
+        "x": 442.9965961974229,
+        "y": 428.0990077643726,
+        "vx": 35.552939641996,
+        "vy": -85.81057591323474,
+        "category": "process"
+      },
+      {
+        "id": "resource-distribution",
+        "x": 613.8727136199458,
+        "y": 777.1052052339026,
+        "vx": -28.597071768250125,
+        "vy": -74.87679839147194,
+        "category": "relationship"
+      },
+      {
+        "id": "symbiosis-mutualism",
+        "x": 774.0613127101278,
+        "y": 566.3975106648587,
+        "vx": 171.40423077591367,
+        "vy": -123.7899725152447,
+        "category": "relationship"
+      }
+    ],
+    "links": [
+      {
+        "source": "fractal-self-similarity",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "fractal-self-similarity",
+        "target": "network-structure",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "emergent-behavior",
+        "target": "feedback-loops",
+        "length": 100.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "cyclical-patterns",
+        "length": 80.0
+      },
+      {
+        "source": "resource-distribution",
+        "target": "symbiosis-mutualism",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "resource-distribution",
+        "length": 150.0
+      },
+      {
+        "source": "hierarchical-organization",
+        "target": "emergent-behavior",
+        "length": 150.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "symbiosis-mutualism",
+        "length": 150.0
+      }
+    ],
+    "tick_count": 10,
+    "alpha": 0.7940257432864097
+  },
+  "final": {
+    "nodes": [
+      {
+        "id": "fractal-self-similarity",
+        "x": 238.94687562682608,
+        "y": 358.07735286626695,
+        "vx": 0.03504650583072938,
+        "vy": 0.024120811462559455,
+        "category": "structural"
+      },
+      {
+        "id": "network-structure",
+        "x": 26.568630869917765,
+        "y": 232.90265242564817,
+        "vx": 0.2414652332692847,
+        "vy": 0.12003610200240518,
+        "category": "structural"
+      },
+      {
+        "id": "hierarchical-organization",
+        "x": 499.9206880779839,
+        "y": 533.9664189046865,
+        "vx": -0.22982527371251749,
+        "vy": 0.06857057585022748,
+        "category": "structural"
+      },
+      {
+        "id": "emergent-behavior",
+        "x": 450.557557205266,
+        "y": 532.7349411083319,
+        "vx": 0.17625649686908043,
+        "vy": 0.036790375287831696,
+        "category": "process"
+      },
+      {
+        "id": "feedback-loops",
+        "x": 507.8229293907241,
+        "y": 587.3006126486674,
+        "vx": 0.000813235467408255,
+        "vy": -0.13571863643269375,
+        "category": "process"
+      },
+      {
+        "id": "cyclical-patterns",
+        "x": 528.1650685609642,
+        "y": 664.2311474775563,
+        "vx": -0.023212224922164862,
+        "vy": -0.09769228056759555,
+        "category": "process"
+      },
+      {
+        "id": "resource-distribution",
+        "x": 827.0136259061615,
+        "y": 486.03860750538377,
+        "vx": -0.10624499771304728,
+        "vy": -0.018410426748471976,
+        "category": "relationship"
+      },
+      {
+        "id": "symbiosis-mutualism",
+        "x": 932.3896226724656,
+        "y": 516.40399144775,
+        "vx": -0.09515710520671193,
+        "vy": 0.0021101593761413103,
+        "category": "relationship"
+      }
+    ],
+    "links": [
+      {
+        "source": "fractal-self-similarity",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "fractal-self-similarity",
+        "target": "network-structure",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "emergent-behavior",
+        "target": "feedback-loops",
+        "length": 100.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "cyclical-patterns",
+        "length": 80.0
+      },
+      {
+        "source": "resource-distribution",
+        "target": "symbiosis-mutualism",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "resource-distribution",
+        "length": 150.0
+      },
+      {
+        "source": "hierarchical-organization",
+        "target": "emergent-behavior",
+        "length": 150.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "symbiosis-mutualism",
+        "length": 150.0
+      }
+    ],
+    "tick_count": 300,
+    "alpha": 0.00098863843506925
+  },
+  "initial": {
+    "nodes": [
+      {
+        "id": "fractal-self-similarity",
+        "x": 76.87805218394695,
+        "y": 626.3741677138116,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "structural"
+      },
+      {
+        "id": "network-structure",
+        "x": 572.9333002688936,
+        "y": 634.5812552799176,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "structural"
+      },
+      {
+        "id": "hierarchical-organization",
+        "x": 417.45633101681756,
+        "y": 36.80925222128306,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "structural"
+      },
+      {
+        "id": "emergent-behavior",
+        "x": 674.2056769033754,
+        "y": 166.36948140903775,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "process"
+      },
+      {
+        "id": "feedback-loops",
+        "x": 747.6073012213166,
+        "y": 489.08253711459247,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "process"
+      },
+      {
+        "id": "cyclical-patterns",
+        "x": 867.4277901029002,
+        "y": 884.8951259219268,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "process"
+      },
+      {
+        "id": "resource-distribution",
+        "x": 967.1135870543125,
+        "y": 496.5831248102422,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "relationship"
+      },
+      {
+        "id": "symbiosis-mutualism",
+        "x": 6.073232697462516,
+        "y": 648.6697986006344,
+        "vx": 0.0,
+        "vy": 0.0,
+        "category": "relationship"
+      }
+    ],
+    "links": [
+      {
+        "source": "fractal-self-similarity",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "fractal-self-similarity",
+        "target": "network-structure",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "hierarchical-organization",
+        "length": 100.0
+      },
+      {
+        "source": "emergent-behavior",
+        "target": "feedback-loops",
+        "length": 100.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "cyclical-patterns",
+        "length": 80.0
+      },
+      {
+        "source": "resource-distribution",
+        "target": "symbiosis-mutualism",
+        "length": 100.0
+      },
+      {
+        "source": "network-structure",
+        "target": "resource-distribution",
+        "length": 150.0
+      },
+      {
+        "source": "hierarchical-organization",
+        "target": "emergent-behavior",
+        "length": 150.0
+      },
+      {
+        "source": "feedback-loops",
+        "target": "symbiosis-mutualism",
+        "length": 150.0
+      }
+    ],
+    "tick_count": 0,
+    "alpha": 1.0
+  }
+}
