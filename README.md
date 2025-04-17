@@ -52,6 +52,8 @@ research-projects/
         └── quantum-entanglement/
 ```
 
+(wip migrating to Apache 2.0)
+
 ## License
 
-This repository is private and all rights are reserved. 
+All rights are reserved.
